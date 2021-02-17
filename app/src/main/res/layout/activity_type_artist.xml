@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".TypeArtistActivity">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="0dp" android:layout_weight="1"
+            android:id="@+id/hlTypeArtist_ActionBar"
+            app:layout_constraintHeight_percent=".07" app:layout_constraintTop_toTopOf="parent"
+            android:background="@android:color/black" app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+            android:id="@+id/ivTypeArtist_ArtistlyLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/artistlylogo" />
+    </LinearLayout>
+
+    <TextView
+            android:text="What type of Artist are you?"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTypeArtist_Type" android:textColor="@android:color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textSize="20sp"
+            app:layout_constraintRight_toRightOf="parent" app:layout_constraintTop_toBottomOf="@+id/hlTypeArtist_ActionBar"/>
+
+    <TextView
+            android:text=" Acting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTypeArtist_Acting"
+            app:layout_constraintTop_toBottomOf="@+id/tvTypeArtist_Type" app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="@android:color/black" android:textSize="18sp"
+            app:layout_constraintRight_toRightOf="parent" android:layout_marginTop="15dp"/>
+    <TextView
+            android:text=" Art"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTypeArtist_Art" app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTypeArtist_Acting" android:textColor="@android:color/black"
+            android:textSize="18sp" app:layout_constraintRight_toRightOf="parent" android:layout_marginTop="5dp"/>
+    <TextView
+            android:text="Dancer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/tvTypeArtist_Dancer"
+            android:textColor="@android:color/black" android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/tvTypeArtist_Art" app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" android:layout_marginTop="5dp"/>
+    <TextView
+            android:text=" Musician"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTypeArtist_Musician"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="@android:color/black" android:textSize="18sp"
+            app:layout_constraintRight_toRightOf="parent" app:layout_constraintTop_toBottomOf="@+id/tvTypeArtist_Dancer"
+            android:layout_marginTop="5dp"/>
+    <TextView
+            android:text="Photographer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/tvTypeArtist_Photographer"
+            app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTypeArtist_Musician" android:textColor="@android:color/black"
+            android:textSize="18sp" android:layout_marginTop="5dp"/>
+    <TextView
+            android:text="Videographer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/tvTypeArtist_Videographer"
+            app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTypeArtist_Photographer" android:textSize="18sp"
+            android:textColor="@android:color/black" android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/tvTypeArtist_None"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text=" None"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTypeArtist_Videographer" />
+    <TextView
+            android:text="Done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTypeArtist_Done"
+            android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@+id/tvTypeArtist_None"
+            app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent"
+            android:textColor="@android:color/holo_green_dark" android:textSize="16sp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
