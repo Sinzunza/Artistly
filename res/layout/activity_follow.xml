@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FollowActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/hlFollow_ActionBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/darker_gray"
+        android:orientation="horizontal"
+        android:paddingBottom="1dp"
+        app:layout_constraintHeight_percent=".07"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvFollow_Username"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:gravity="bottom|center_horizontal"
+            android:text="Username"
+            android:textColor="@android:color/black"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/ibFollow_Back"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="@android:color/background_light"
+            android:paddingRight="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/hlFollow_Follow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/hlFollow_ActionBar">
+
+        <TextView
+            android:id="@+id/tvFollow_Followers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:text="Followers"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvFollow_Following"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:text="Following"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hlFollow_FollowBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/hlFollow_Follow">
+
+        <FrameLayout
+            android:id="@+id/flFollow_FollowersBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/black"
+            android:paddingBottom="3dp">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flFollow_FollowingBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/black"
+            android:paddingBottom="0dp">
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/svFollow_Scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/hlFollow_FollowBar">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFollow_Users"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent"
+        android:background="@android:color/holo_green_dark" android:id="@+id/hlFollow_NavigationBar"
+        app:layout_constraintHeight_percent=".08" android:layout_height="0dp">
+
+        <ImageButton
+            android:id="@+id/ibFollow_Home"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:background="@android:color/black"
+            android:src="@drawable/ic_home" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/ibFollow_Messages"
+            android:src="@drawable/ic_messages"
+            android:background="@android:color/black" android:layout_weight="1" android:layout_marginTop="2dp"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/ibFollow_Explore"
+            android:src="@drawable/ic_explore" android:background="@android:color/black" android:layout_weight="1"
+            android:layout_marginTop="2dp"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/ibFollow_NewPost" android:background="@android:color/black"
+            android:src="@drawable/ic_add"
+            android:layout_weight="1" android:layout_marginTop="2dp"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/ibFollow_Profile"
+            android:src="@drawable/ic_profile"
+            android:background="@android:color/black" tools:layout_editor_absoluteX="80dp"
+            tools:layout_editor_absoluteY="4dp"
+            android:layout_weight="1" android:layout_marginTop="2dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
