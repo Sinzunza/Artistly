@@ -103,21 +103,32 @@ public class ProfileVisitingFragment extends Fragment {
                 final userDB theUserDB = new userDB();
                 theUserDB.getDBRef().addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    // if following then remove from following and change following to follow and increment followers number
-                        if (snapshot.child("following").hasChild(theVisitingUserDB.getUserID())) {
-                            theUserDB.removeFollowing(theVisitingUserDB);
-                            tvProfileVisitingFollow.setText("Follow");
-                            ivProfileVisitingFollow.setImageDrawable(getActivity().getDrawable(R.drawable.ic_addfriend));
-                            tvProfileVisitingFollowersNum.setText(String.valueOf(Integer.parseInt(tvProfileVisitingFollowersNum.getText().toString())-1));
-                        }
-                    // if not following then add to following and change follow to following and decrement followers number
-                        else {
-                            theUserDB.addFollowing(theVisitingUserDB);
-                            tvProfileVisitingFollow.setText("Following");
-                            ivProfileVisitingFollow.setImageDrawable(getActivity().getDrawable(R.drawable.ic_checkmark));
-                            tvProfileVisitingFollowersNum.setText(String.valueOf(Integer.parseInt(tvProfileVisitingFollowersNum.getText().toString())+1));
-                        }
+                    public void onDataChange(@NonNull final DataSnapshot snapshotUser) {
+                        theVisitingUserDB.getDBRef().addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshotVisiting) {
+                                // if following then remove from following and change following to follow and increment followers number
+                                if (snapshotUser.child("following").hasChild(theVisitingUserDB.getUserID())) {
+                                    theUserDB.removeFollowing(theVisitingUserDB);
+                                    tvProfileVisitingFollow.setText("Follow");
+                                    ivProfileVisitingFollow.setImageDrawable(getActivity().getDrawable(R.drawable.ic_addfriend));
+                                    tvProfileVisitingFollowersNum.setText(String.valueOf(Integer.parseInt(tvProfileVisitingFollowersNum.getText().toString())-1));
+                                }
+                                // if not following then add to following and change follow to following and decrement followers number
+                                else {
+                                    theUserDB.addFollowing(snapshotUser, theVisitingUserDB, theVisitingUserDB.getUsernameLowerCase(snapshotVisiting));
+                                    tvProfileVisitingFollow.setText("Following");
+                                    ivProfileVisitingFollow.setImageDrawable(getActivity().getDrawable(R.drawable.ic_checkmark));
+                                    tvProfileVisitingFollowersNum.setText(String.valueOf(Integer.parseInt(tvProfileVisitingFollowersNum.getText().toString())+1));
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -129,7 +140,7 @@ public class ProfileVisitingFragment extends Fragment {
         return v;
     }
 
-    // load user data only when activity is opened
+// load user data only when activity is opened
     @Override
     public void onResume() {
         super.onResume();

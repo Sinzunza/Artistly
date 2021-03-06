@@ -30,6 +30,10 @@ public class userDB {
         return snapshot.child("username").getValue().toString();
     }
 
+    public String getUsernameLowerCase(DataSnapshot snapshot){
+        return snapshot.child("usernameLowerCase").getValue().toString();
+    }
+
     public String getName(DataSnapshot snapshot) {
         return snapshot.child("name").getValue().toString();
     }
@@ -46,9 +50,6 @@ public class userDB {
         return snapshot.child("profilePhoto").getValue().toString();
     }
 
-    public String getVisitingUserID(DataSnapshot snapshot){
-        return snapshot.child("visitingUserID").getValue().toString();
-    }
     public long getFollowersCount(DataSnapshot snapshot){
         return snapshot.child("followers").getChildrenCount();
     }
@@ -86,13 +87,13 @@ public class userDB {
     }
 
     // add visitingUser to user's following and add user to visiting user's followers
-    public void addFollowing(visitingUserDB visitingUserDB){
+    public void addFollowing(DataSnapshot snapshot, visitingUserDB visitingUserDB, String visitingUserUsername){
         Map newPostUser = new HashMap();
-        newPostUser.put(visitingUserDB.getUserID(), "");
+        newPostUser.put(visitingUserDB.getUserID(), getUsernameLowerCase(snapshot));
         getDBRef().child("following").updateChildren(newPostUser);
 
         Map newPostVisitingUser = new HashMap();
-        newPostVisitingUser.put(userID, "");
+        newPostVisitingUser.put(userID, visitingUserUsername);
         visitingUserDB.getDBRef().child("followers").updateChildren(newPostVisitingUser);
     }
 

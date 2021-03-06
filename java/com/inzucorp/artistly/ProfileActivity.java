@@ -25,7 +25,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.Query;
 
-import Classes.postsAdapter;
+import Models.postsAdapter;
 import Classes.artistlyDB;
 import Classes.visitingUserDB;
 import Fragments.ProfileUserFragment;
@@ -111,7 +111,7 @@ public class ProfileActivity extends AppCompatActivity {
         ibProfileMessages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, MessagesActivity.class));
+                startActivity(new Intent(ProfileActivity.this, MessagingActivity.class));
             }
         });
 

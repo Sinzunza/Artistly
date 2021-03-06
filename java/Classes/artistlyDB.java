@@ -45,13 +45,13 @@ public final class artistlyDB {
 
     // if path has children equal to "equalTo" then it will return those children
     public static Query equalToQuery(String path, String orderBy, String equalTo){
-        DatabaseReference dbRef =FirebaseDatabase.getInstance().getReference().child(path);
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(path);
         return dbRef.orderByChild(orderBy).equalTo(equalTo);
     }
 
     // if path has children starting with "startingWith" then it will return those children
     public static Query startingWithQuery(String path, String orderBy, String startingWith){
-        DatabaseReference dbRef =FirebaseDatabase.getInstance().getReference().child(path);
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(path);
         return dbRef.orderByChild(orderBy).startAt(startingWith).endAt(startingWith + "\uf8ff");
     }
 }

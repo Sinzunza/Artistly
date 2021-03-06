@@ -26,6 +26,10 @@ public class visitingUserDB {
         return snapshot.child("username").getValue().toString();
     }
 
+    public String getUsernameLowerCase(DataSnapshot snapshot){
+        return snapshot.child("usernameLowerCase").getValue().toString();
+    }
+
     public String getName(DataSnapshot snapshot) {
         return snapshot.child("name").getValue().toString();
     }

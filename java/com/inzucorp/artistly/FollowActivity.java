@@ -25,7 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import Classes.usersAdapter;
+import Models.usersAdapter;
 import Classes.artistlyDB;
 import Classes.userDB;
 import Classes.visitingUserDB;
@@ -106,7 +106,7 @@ public class FollowActivity extends AppCompatActivity {
         ibFollowMessages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FollowActivity.this, MessagesActivity.class));
+                startActivity(new Intent(FollowActivity.this, MessagingActivity.class));
             }
         });
 

@@ -145,7 +145,7 @@ public class NewPostActivity extends AppCompatActivity {
         ibNewPostMessages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(NewPostActivity.this, MessagesActivity.class));
+                startActivity(new Intent(NewPostActivity.this, MessagingActivity.class));
             }
         });
 

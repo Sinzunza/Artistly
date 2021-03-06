@@ -34,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
         ibHomeMessages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, MessagesActivity.class));
+                startActivity(new Intent(HomeActivity.this, MessagingActivity.class));
             }
         });
 

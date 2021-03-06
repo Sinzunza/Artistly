@@ -58,7 +58,7 @@ public class PostActivity extends AppCompatActivity {
         ibPostMessages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PostActivity.this, MessagesActivity.class));
+                startActivity(new Intent(PostActivity.this, MessagingActivity.class));
             }
         });
 

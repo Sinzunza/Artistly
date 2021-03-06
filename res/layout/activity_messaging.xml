@@ -5,58 +5,60 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ExploreActivity">
-
+        tools:context=".MessagingActivity">
 
     <FrameLayout
-        android:id="@+id/flExplore_Fragment"
+        android:id="@+id/flMessaging_Fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/hlExplore_NavigationBar"
-        app:layout_constraintTop_toTopOf="parent">
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/hlMessaging_NavigationBar">
     </FrameLayout>
+
 
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent"
-            android:id="@+id/hlExplore_NavigationBar"
-            app:layout_constraintHeight_percent=".08" android:layout_height="0dp"
-            android:background="@android:color/holo_green_dark">
+            android:background="@android:color/holo_green_dark" android:id="@+id/hlMessaging_NavigationBar"
+            app:layout_constraintHeight_percent=".08" android:layout_height="0dp">
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/ibExplore_Home"
-                android:src="@drawable/ic_home" android:background="@android:color/black"
+                android:id="@+id/ibMessaging_Home"
+                android:src="@drawable/ic_home"
+                android:layout_weight="1" android:background="@android:color/black" android:layout_marginTop="2dp"/>
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/ibMessaging_Messages"
+                android:src="@drawable/ic_messages"
+                android:background="@android:color/black"
                 android:layout_weight="1" android:layout_marginTop="2dp"/>
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/ibExplore_Messages"
-                android:src="@drawable/ic_messages"
-                android:background="@android:color/black" android:layout_weight="1" android:layout_marginTop="2dp"/>
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/ibExplore_Explore"
+                android:id="@+id/ibMessaging_Explore"
                 android:src="@drawable/ic_explore" android:background="@android:color/black" android:layout_weight="1"
                 android:layout_marginTop="2dp"/>
+
+        <ImageButton
+            android:id="@+id/ibMessaging_NewPost"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:background="@android:color/black"
+            android:src="@drawable/ic_add" />
+
         <ImageButton
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/ibExplore_NewPost" android:background="@android:color/black"
-                android:src="@drawable/ic_add"
-                android:layout_weight="1" android:layout_marginTop="2dp"/>
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/ibExplore_Profile"
+                android:id="@+id/ibMessaging_Profile"
                 android:src="@drawable/ic_profile"
                 android:background="@android:color/black" tools:layout_editor_absoluteX="80dp"
                 tools:layout_editor_absoluteY="4dp"
-                android:layout_weight="1" android:layout_marginTop="2dp"/>
+                android:layout_weight="1" android:layout_height="match_parent" android:layout_marginTop="2dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
