@@ -1,7 +1,6 @@
 package Fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,7 +22,6 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.Query;
-import com.inzucorp.artistly.ProfileActivity;
 import com.inzucorp.artistly.R;
 
 import Classes.artistlyDB;

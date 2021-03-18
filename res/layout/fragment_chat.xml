@@ -35,5 +35,55 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <ScrollView
+        android:id="@+id/svChat_Messages"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/clChat_TextMessage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clChat_ActionBar">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvChat_Messages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clChat_TextMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/rounded_corners"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/ibChat_Send">
+
+        <EditText
+            android:id="@+id/etChat_TextMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin=".5dp"
+            android:background="@android:color/background_light"
+            android:gravity="start|top"
+            android:hint="Send Message"
+            android:inputType="textMultiLine"
+            android:padding="7dp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/ibChat_Send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_send"
+        app:layout_constraintBottom_toBottomOf="@id/clChat_TextMessage"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/clChat_TextMessage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

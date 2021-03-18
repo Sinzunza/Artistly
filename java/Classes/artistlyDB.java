@@ -18,10 +18,11 @@ public final class artistlyDB {
 // add / remove methods
 
     // add a new media post to firebase and return it's mediaID
-    public static String createMedia(String user, String caption, Uri photo, String description) {
+    public static String createMedia(String caption, Uri photo, String description) {
+        final userDB theUserDB = new userDB();
         final String randomUrl = UUID.randomUUID().toString();
         Map newPost = new HashMap();
-        newPost.put(randomUrl + "/user", user);
+        newPost.put(randomUrl + "/user", theUserDB.getUserID());
         newPost.put(randomUrl + "/caption", caption);
         newPost.put(randomUrl + "/photo", photo.toString());
         FirebaseDatabase.getInstance().getReference().child("Media").updateChildren(newPost);
@@ -29,16 +30,37 @@ public final class artistlyDB {
     }
 
     // add a new service post to firebase and return it's serviceID
-    public static String createService(String user, String title, Uri photo, String fee, String description) {
+    public static String createService(String title, Uri photo, String fee, String description) {
+        final userDB theUserDB = new userDB();
         final String randomUrl = UUID.randomUUID().toString();
         Map newPost = new HashMap();
-        newPost.put(randomUrl + "/user", user);
+        newPost.put(randomUrl + "/user", theUserDB.getUserID());
         newPost.put(randomUrl + "/title", title);
         newPost.put(randomUrl + "/photo", photo.toString());
         newPost.put(randomUrl + "/fee", fee);
         newPost.put(randomUrl + "/description", "" + description);
         FirebaseDatabase.getInstance().getReference().child("Services").updateChildren(newPost);
         return randomUrl;
+    }
+
+    public static String createChat(String message) {
+        final userDB theUserDB = new userDB();
+        final String chatUrl = UUID.randomUUID().toString();
+        final String messageUrl = UUID.randomUUID().toString();
+        Map newPost = new HashMap();
+        newPost.put("messageText", message);
+        newPost.put("sender", theUserDB.getUserID());
+        theUserDB.getDBRef().child("messages/" + chatUrl + "/" + messageUrl).updateChildren(newPost);
+        return chatUrl;
+    }
+
+    public static void newMessage(String message, String chatUrl) { // move this to userDB
+        final userDB theUserDB = new userDB();
+        final String messageUrl = UUID.randomUUID().toString();
+        Map newPost = new HashMap();
+        newPost.put("messageText", message);
+        newPost.put("sender", theUserDB.getUserID());
+        theUserDB.getDBRef().child("messages/" + chatUrl + "/" + messageUrl).updateChildren(newPost);
     }
 
 // query methods

@@ -216,18 +216,17 @@ public class NewPostActivity extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-                                        final userDB theUserDB = new userDB();
                                         Intent intentStartPost;
                                         String postID;
                                     // upload post to database path depending on postType
                                         if (postType == ArtistlyPost.Media){
-                                            postID = artistlyDB.createMedia(theUserDB.getUserID(), newPostTitle, uri, newPostDescription);
+                                            postID = artistlyDB.createMedia(newPostTitle, uri, newPostDescription);
                                             intentStartPost = new Intent(NewPostActivity.this, PostActivity.class);
                                             intentStartPost.putExtra("postID", postID);
                                             intentStartPost.putExtra("postType", postType);
                                         }
                                         else {
-                                            postID = artistlyDB.createService(theUserDB.getUserID(), newPostTitle, uri, newPostFee, newPostDescription);
+                                            postID = artistlyDB.createService(newPostTitle, uri, newPostFee, newPostDescription);
                                             intentStartPost = new Intent(NewPostActivity.this, PostActivity.class);
                                             intentStartPost.putExtra("postID", postID);
                                             intentStartPost.putExtra("postType", postType);
