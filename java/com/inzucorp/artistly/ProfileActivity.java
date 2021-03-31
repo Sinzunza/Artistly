@@ -27,7 +27,7 @@ import com.google.firebase.database.Query;
 
 import Models.postsAdapter;
 import Classes.artistlyDB;
-import Classes.visitingUserDB;
+import Classes.otherUserDB;
 import Fragments.ProfileUserFragment;
 import Fragments.ProfileVisitingFragment;
 
@@ -40,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
     RecyclerView rvProfilePosts;
 
 // local variables
-    visitingUserDB someUserDB;
+    otherUserDB someUserDB;
     ArtistlyPost postType;
     float x1, x2, y1; // for swiping functionality
 
@@ -65,12 +65,12 @@ public class ProfileActivity extends AppCompatActivity {
     // initiate local variables
         String someUserID = getIntent().getStringExtra("someUserID");
         if (someUserID == null){
-            someUserDB =  new visitingUserDB(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            someUserDB =  new otherUserDB(FirebaseAuth.getInstance().getCurrentUser().getUid());
             final Fragment frProfileUser = new ProfileUserFragment();
             getSupportFragmentManager().beginTransaction().add(flProfileFragment.getId(), frProfileUser).commit();
         }
         else {
-            someUserDB =  new visitingUserDB(someUserID);
+            someUserDB =  new otherUserDB(someUserID);
             final Fragment frProfileVisitingUser= new ProfileVisitingFragment();
             Bundle bundle = new Bundle();
             bundle.putString("visitingUserID", getIntent().getStringExtra("someUserID"));
@@ -210,7 +210,7 @@ public class ProfileActivity extends AppCompatActivity {
             @NonNull
             @Override
             public ProfileActivity.postsAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_profile_posts, parent, false);
+                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_posts, parent, false);
                 return new ProfileActivity.postsAdapterViewHolder(v);
             }
         };
@@ -227,8 +227,8 @@ public class ProfileActivity extends AppCompatActivity {
         }
         public void setInfo(Context ctx, String photo){
             final Context ctxF = ctx;
-            final ImageView ivProfilePostsMedia = mView.findViewById(R.id.ivProfilePosts_Image);
-            Glide.with(ctxF).load(photo).into(ivProfilePostsMedia);
+            final ImageView ivPostsAdImage = mView.findViewById(R.id.ivPostsAd_Image);
+            Glide.with(ctxF).load(photo).into(ivPostsAdImage);
         }
     }
 

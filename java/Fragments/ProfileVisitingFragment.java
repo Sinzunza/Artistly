@@ -23,7 +23,7 @@ import com.inzucorp.artistly.FollowActivity.ArtistlyFollow;
 import com.inzucorp.artistly.R;
 
 import Classes.userDB;
-import Classes.visitingUserDB;
+import Classes.otherUserDB;
 
 public class ProfileVisitingFragment extends Fragment {
 
@@ -36,14 +36,14 @@ public class ProfileVisitingFragment extends Fragment {
     ConstraintLayout clProfileVisitingFollow;
 
 // local variables
-    visitingUserDB theVisitingUserDB;
+    otherUserDB theOtherUserDB;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         // initialize local variables
-            theVisitingUserDB = new visitingUserDB(getArguments().getString("visitingUserID"));
+            theOtherUserDB = new otherUserDB(getArguments().getString("visitingUserID"));
         }
     }
 
@@ -79,7 +79,7 @@ public class ProfileVisitingFragment extends Fragment {
             public void onClick(View v) {
             // pass visitingUserID and what follow was clicked as arguments through the intent
                 Intent intentStartFollow = new Intent(getActivity(), FollowActivity.class);
-                intentStartFollow.putExtra("someUserID", theVisitingUserDB.getUserID());
+                intentStartFollow.putExtra("someUserID", theOtherUserDB.getUserID());
                 intentStartFollow.putExtra("followType", ArtistlyFollow.Followers);
                 startActivity(intentStartFollow);
             }
@@ -90,7 +90,7 @@ public class ProfileVisitingFragment extends Fragment {
             public void onClick(View v) {
             // pass visitingUserID and what follow was clicked as arguments through the intent
                 Intent intentStartFollow = new Intent(getActivity(), FollowActivity.class);
-                intentStartFollow.putExtra("someUserID", theVisitingUserDB.getUserID());
+                intentStartFollow.putExtra("someUserID", theOtherUserDB.getUserID());
                 intentStartFollow.putExtra("followType", ArtistlyFollow.Following);
                 startActivity(intentStartFollow);
             }
@@ -104,19 +104,19 @@ public class ProfileVisitingFragment extends Fragment {
                 theUserDB.getDBRef().addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull final DataSnapshot snapshotUser) {
-                        theVisitingUserDB.getDBRef().addListenerForSingleValueEvent(new ValueEventListener() {
+                        theOtherUserDB.getDBRef().addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshotVisiting) {
                                 // if following then remove from following and change following to follow and increment followers number
-                                if (snapshotUser.child("following").hasChild(theVisitingUserDB.getUserID())) {
-                                    theUserDB.removeFollowing(theVisitingUserDB);
+                                if (snapshotUser.child("following").hasChild(theOtherUserDB.getUserID())) {
+                                    theUserDB.removeFollowing(theOtherUserDB);
                                     tvProfileVisitingFollow.setText("Follow");
                                     ivProfileVisitingFollow.setImageDrawable(getActivity().getDrawable(R.drawable.ic_addfriend));
                                     tvProfileVisitingFollowersNum.setText(String.valueOf(Integer.parseInt(tvProfileVisitingFollowersNum.getText().toString())-1));
                                 }
                                 // if not following then add to following and change follow to following and decrement followers number
                                 else {
-                                    theUserDB.addFollowing(snapshotUser, theVisitingUserDB, theVisitingUserDB.getUsernameLowerCase(snapshotVisiting));
+                                    theUserDB.addFollowing(snapshotUser, theOtherUserDB, theOtherUserDB.getUsernameLowerCase(snapshotVisiting));
                                     tvProfileVisitingFollow.setText("Following");
                                     ivProfileVisitingFollow.setImageDrawable(getActivity().getDrawable(R.drawable.ic_checkmark));
                                     tvProfileVisitingFollowersNum.setText(String.valueOf(Integer.parseInt(tvProfileVisitingFollowersNum.getText().toString())+1));
@@ -144,17 +144,17 @@ public class ProfileVisitingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        theVisitingUserDB.getDBRef().addListenerForSingleValueEvent(new ValueEventListener() {
+        theOtherUserDB.getDBRef().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
             // setting visitingUser's info in the activity
-                tvProfileVisitingUsername.setText(theVisitingUserDB.getUsername(snapshot));
-                tvProfileVisitingName.setText(theVisitingUserDB.getName(snapshot));
-                tvProfileVisitingTypeArtist.setText(theVisitingUserDB.getTypeArtist(snapshot));
-                tvProfileVisitingFollowersNum.setText(String.valueOf(theVisitingUserDB.getFollowersCount(snapshot)));
-                tvProfileVisitingFollowingNum.setText(String.valueOf(theVisitingUserDB.getFollowingCount(snapshot)));
-                tvProfileVisitingBio.setText(theVisitingUserDB.getBio(snapshot));
-                Glide.with(getActivity()).load(theVisitingUserDB.getProfilePhoto(snapshot)).into(civProfileVisitingPhoto);
+                tvProfileVisitingUsername.setText(theOtherUserDB.getUsername(snapshot));
+                tvProfileVisitingName.setText(theOtherUserDB.getName(snapshot));
+                tvProfileVisitingTypeArtist.setText(theOtherUserDB.getTypeArtist(snapshot));
+                tvProfileVisitingFollowersNum.setText(String.valueOf(theOtherUserDB.getFollowersCount(snapshot)));
+                tvProfileVisitingFollowingNum.setText(String.valueOf(theOtherUserDB.getFollowingCount(snapshot)));
+                tvProfileVisitingBio.setText(theOtherUserDB.getBio(snapshot));
+                Glide.with(getActivity()).load(theOtherUserDB.getProfilePhoto(snapshot)).into(civProfileVisitingPhoto);
                 final userDB userDB = new userDB();
                 if (snapshot.child("followers").hasChild(userDB.getUserID())) {
                     tvProfileVisitingFollow.setText("Following");

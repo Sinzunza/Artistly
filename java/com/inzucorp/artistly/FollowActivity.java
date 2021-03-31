@@ -28,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import Models.usersAdapter;
 import Classes.artistlyDB;
 import Classes.userDB;
-import Classes.visitingUserDB;
+import Classes.otherUserDB;
 
 public class FollowActivity extends AppCompatActivity {
 // public enums. Needed in Profile Fragments.
@@ -44,7 +44,7 @@ public class FollowActivity extends AppCompatActivity {
     ImageButton ibFollowBack, ibFollowHome, ibFollowMessages, ibFollowExplore, ibFollowNewPost, ibFollowProfile;
 
 // local variables
-    visitingUserDB someUserDB;
+    otherUserDB someUserDB;
     ArtistlyFollow followType = ArtistlyFollow.Followers;
     float x1, x2, y1; // used for swiping functionality
 
@@ -137,7 +137,7 @@ public class FollowActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-        someUserDB = new visitingUserDB(getIntent().getStringExtra("someUserID")); // since just displaying username, we'll use visitingUserFirebase
+        someUserDB = new otherUserDB(getIntent().getStringExtra("someUserID")); // since just displaying username, we'll use visitingUserFirebase
         someUserDB.getDBRef().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -187,13 +187,13 @@ public class FollowActivity extends AppCompatActivity {
             followType = ArtistlyFollow.Following;
             flFollowFollowingBar.setPadding(0,0,0,6);
             flFollowFollowersBar.setPadding(0,0,0,0);
-            usernameQuery = artistlyDB.equalToQuery("Users", "followers" + "/" + someUserDB.getUserID(), "");
+            usernameQuery = artistlyDB.startingWithQuery("Users", "followers" + "/" + someUserDB.getUserID(), "");
         }
         else {
             followType = ArtistlyFollow.Followers;
             flFollowFollowersBar.setPadding(0,0,0,6);
             flFollowFollowingBar.setPadding(0,0,0,0);
-            usernameQuery = artistlyDB.equalToQuery("Users", "following" + "/" + someUserDB.getUserID(), "");
+            usernameQuery = artistlyDB.startingWithQuery("Users", "following" + "/" + someUserDB.getUserID(), "");
         }
 
     // implement FirebaseRecycler on recycler adapter
@@ -239,13 +239,13 @@ public class FollowActivity extends AppCompatActivity {
         }
         public void setInfo(Context ctx, String username, String name, String profilePhoto){
             final Context ctxF = ctx;
-            TextView tvUsersUsername =  mView.findViewById(R.id.tvUsers_Usernames);
-            TextView tvUsersName = mView.findViewById(R.id.tvUsers_Name);
-            final ImageView civUsersProfilePhoto = mView.findViewById(R.id.civUsers_ProfilePhoto);
+            TextView tvUsersAdUsername =  mView.findViewById(R.id.tvUsersAd_Usernames);
+            TextView tvUsersAdName = mView.findViewById(R.id.tvUsersAd_Name);
+            final ImageView civUsersAdProfilePhoto = mView.findViewById(R.id.civUsersAd_ProfilePhoto);
 
-            tvUsersUsername.setText(username);
-            tvUsersName.setText(name);
-            Glide.with(ctxF).load(profilePhoto).into(civUsersProfilePhoto);
+            tvUsersAdUsername.setText(username);
+            tvUsersAdName.setText(name);
+            Glide.with(ctxF).load(profilePhoto).into(civUsersAdProfilePhoto);
         }
     }
 }

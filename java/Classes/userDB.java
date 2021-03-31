@@ -87,20 +87,20 @@ public class userDB {
     }
 
     // add visitingUser to user's following and add user to visiting user's followers
-    public void addFollowing(DataSnapshot snapshot, visitingUserDB visitingUserDB, String visitingUserUsername){
+    public void addFollowing(DataSnapshot snapshot, otherUserDB otherUserDB, String visitingUserUsername){
         Map newPostUser = new HashMap();
-        newPostUser.put(visitingUserDB.getUserID(), getUsernameLowerCase(snapshot));
+        newPostUser.put(otherUserDB.getUserID(), getUsernameLowerCase(snapshot));
         getDBRef().child("following").updateChildren(newPostUser);
 
         Map newPostVisitingUser = new HashMap();
         newPostVisitingUser.put(userID, visitingUserUsername);
-        visitingUserDB.getDBRef().child("followers").updateChildren(newPostVisitingUser);
+        otherUserDB.getDBRef().child("followers").updateChildren(newPostVisitingUser);
     }
 
     //remove visitingUser from user's following and remove user from visiting user's followers
-    public void removeFollowing(visitingUserDB visitingUserDB){
-        getDBRef().child("following").child(visitingUserDB.getUserID()).removeValue();
-        visitingUserDB.getDBRef().child("followers").child(userID).removeValue();
+    public void removeFollowing(otherUserDB otherUserDB){
+        getDBRef().child("following").child(otherUserDB.getUserID()).removeValue();
+        otherUserDB.getDBRef().child("followers").child(userID).removeValue();
     }
 
 }

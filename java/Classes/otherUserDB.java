@@ -6,11 +6,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 // When accessing a visitingUser's database, it must be accessed through this interface only.
 // A visitingUser object can be any visitingUser and can also be the user. However, a user object can only be the user.
-public class visitingUserDB {
+public class otherUserDB {
 
     final private String userID;
 
-    public visitingUserDB(String userID){
+    public otherUserDB(String userID){
         this.userID = userID;
     }
 

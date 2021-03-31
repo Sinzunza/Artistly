@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/ivProfilePosts_Image"
+        android:id="@+id/ivPostsAd_Image"
         android:layout_width="wrap_content"
         android:layout_height="110dp"
         android:layout_weight="1"

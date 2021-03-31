@@ -144,13 +144,13 @@ public class SearchExploreFragment extends Fragment {
         }
         public void setInfo(Context ctx, String username, String name, String profilePhoto){
             final Context ctxF = ctx;
-            TextView tvUsersUsername =  mView.findViewById(R.id.tvUsers_Usernames);
-            TextView tvUsersName = mView.findViewById(R.id.tvUsers_Name);
-            final ImageView civUsersProfilePhoto = mView.findViewById(R.id.civUsers_ProfilePhoto);
+            TextView tvUsersAdUsername =  mView.findViewById(R.id.tvUsersAd_Usernames);
+            TextView tvUsersAdName = mView.findViewById(R.id.tvUsersAd_Name);
+            final ImageView civUsersAdProfilePhoto = mView.findViewById(R.id.civUsersAd_ProfilePhoto);
 
-            tvUsersUsername.setText(username);
-            tvUsersName.setText(name);
-            Glide.with(ctxF).load(profilePhoto).into(civUsersProfilePhoto);
+            tvUsersAdUsername.setText(username);
+            tvUsersAdName.setText(name);
+            Glide.with(ctxF).load(profilePhoto).into(civUsersAdProfilePhoto);
         }
     }
 }

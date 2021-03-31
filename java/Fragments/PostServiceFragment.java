@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.inzucorp.artistly.R;
 ;
 import Classes.serviceDB;
-import Classes.visitingUserDB;
+import Classes.otherUserDB;
 
 public class PostServiceFragment extends Fragment {
 
@@ -65,7 +65,7 @@ public class PostServiceFragment extends Fragment {
                 tvPostServiceDescription.setText(theServiceDB.getDescription(snapshot));
                 tvPostServiceFee.setText(theServiceDB.getFee(snapshot));
                 Glide.with(getActivity()).load(theServiceDB.getPhoto(snapshot)).into(ivPostServicePostPhoto);
-                final visitingUserDB someUserDB = new visitingUserDB(theServiceDB.getUser(snapshot));
+                final otherUserDB someUserDB = new otherUserDB(theServiceDB.getUser(snapshot));
                 someUserDB.getDBRef().addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

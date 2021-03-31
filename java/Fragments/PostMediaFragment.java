@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.inzucorp.artistly.R;
 
 import Classes.mediaDB;
-import Classes.visitingUserDB;
+import Classes.otherUserDB;
 
 public class PostMediaFragment extends Fragment {
 
@@ -61,7 +61,7 @@ public class PostMediaFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 tvPostMediaCaption.setText(theMediaDB.getCaption(snapshot));
                 Glide.with(getActivity()).load(theMediaDB.getPhoto(snapshot)).into(ivPostMediaPostPhoto);
-                final visitingUserDB someUserDB = new visitingUserDB(theMediaDB.getUser(snapshot));
+                final otherUserDB someUserDB = new otherUserDB(theMediaDB.getUser(snapshot));
                 someUserDB.getDBRef().addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

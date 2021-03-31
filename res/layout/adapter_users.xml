@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/clUsers_Layout"
+    android:id="@+id/clUsersAd_Layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/civUsers_ProfilePhoto"
+        android:id="@+id/civUsersAd_ProfilePhoto"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginLeft="10dp"
@@ -16,16 +16,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/vlUsers_Info"
+        android:id="@+id/vlUsersAd_Info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="vertical"
-        app:layout_constraintLeft_toRightOf="@id/civUsers_ProfilePhoto"
+        app:layout_constraintLeft_toRightOf="@id/civUsersAd_ProfilePhoto"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvUsers_Usernames"
+            android:id="@+id/tvUsersAd_Usernames"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="3dp"
@@ -34,7 +34,7 @@
             android:textSize="17sp" />
 
         <TextView
-            android:id="@+id/tvUsers_Name"
+            android:id="@+id/tvUsersAd_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"

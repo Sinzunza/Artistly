@@ -43,24 +43,28 @@ public final class artistlyDB {
         return randomUrl;
     }
 
-    public static String createChat(String message) {
-        final userDB theUserDB = new userDB();
-        final String chatUrl = UUID.randomUUID().toString();
+    public static void createChat(otherUserDB theOtherUserDB, String message, String timeStamp) {  // move this to userDB
+        final userDB theUserDB = new userDB();;
         final String messageUrl = UUID.randomUUID().toString();
         Map newPost = new HashMap();
         newPost.put("messageText", message);
-        newPost.put("sender", theUserDB.getUserID());
-        theUserDB.getDBRef().child("messages/" + chatUrl + "/" + messageUrl).updateChildren(newPost);
-        return chatUrl;
+        newPost.put("receiver", theOtherUserDB.getUserID());
+        newPost.put("sender", theUserDB.getUserID());;
+        newPost.put("timeStamp", timeStamp);
+        theUserDB.getDBRef().child("messages/" + theOtherUserDB.getUserID() + "/" + messageUrl).updateChildren(newPost);
+        theOtherUserDB.getDBRef().child("messages/" + theUserDB.getUserID() + "/" + messageUrl).updateChildren(newPost);
     }
 
-    public static void newMessage(String message, String chatUrl) { // move this to userDB
+    public static void newMessage(otherUserDB theOtherUserDB, String message, String timeStamp) { // move this to userDB
         final userDB theUserDB = new userDB();
         final String messageUrl = UUID.randomUUID().toString();
         Map newPost = new HashMap();
         newPost.put("messageText", message);
+        newPost.put("receiver", theOtherUserDB.getUserID());
         newPost.put("sender", theUserDB.getUserID());
-        theUserDB.getDBRef().child("messages/" + chatUrl + "/" + messageUrl).updateChildren(newPost);
+        newPost.put("timeStamp", timeStamp);
+        theUserDB.getDBRef().child("messages/" + theOtherUserDB.getUserID() + "/" + messageUrl).updateChildren(newPost);
+        theOtherUserDB.getDBRef().child("messages/" + theUserDB.getUserID() + "/" + messageUrl).updateChildren(newPost);
     }
 
 // query methods
@@ -75,5 +79,11 @@ public final class artistlyDB {
     public static Query startingWithQuery(String path, String orderBy, String startingWith){
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(path);
         return dbRef.orderByChild(orderBy).startAt(startingWith).endAt(startingWith + "\uf8ff");
+    }
+
+    // if path has children starting with "startingWith" then it will return those children
+    public static Query orderedByQuery(String path, String orderBy){
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(path);
+        return dbRef.orderByChild(orderBy);
     }
 }
