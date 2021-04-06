@@ -1,6 +1,7 @@
 package Fragments;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -46,6 +47,8 @@ public class ProfileUserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profile_user, container, false);
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
     // initialize layout ids
         tvProfileUserUsername = v.findViewById(R.id.tvProfileUser_Username);
         tvProfileUserName = v.findViewById(R.id.tvProfileUser_Name);

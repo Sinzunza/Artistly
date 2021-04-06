@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -40,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
     RecyclerView rvProfilePosts;
 
 // local variables
-    otherUserDB someUserDB;
+    otherUserDB someUserDB; // someUser can be either the user or other user
     ArtistlyPost postType;
     float x1, x2, y1; // for swiping functionality
 
@@ -48,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
     // initialize layout ids
         ivProfileMedia = findViewById(R.id.ivProfile_Media);

@@ -2,6 +2,7 @@ package Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -50,6 +51,8 @@ public class SearchExploreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_search_explore, container, false);
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
     // initialize local variables
         theUserDB = new userDB();
     // initialize layout ids

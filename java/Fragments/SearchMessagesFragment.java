@@ -1,6 +1,7 @@
 package Fragments;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -51,6 +52,8 @@ public class SearchMessagesFragment extends Fragment {
                              Bundle savedInstanceState) {
     // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_search_messages, container, false);
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
     // initialize local variables
         theUserDB = new userDB();
     // initialize layout ids
@@ -112,11 +115,11 @@ public class SearchMessagesFragment extends Fragment {
                         @Override
                         public void onClick(View v) {
                             // pass the user that was clicked as an argument through the intent
-                            final Fragment frChat = new ChatFragment();
+                            final Fragment frMessages = new MessagesFragment();
                             Bundle bundle = new Bundle();
                             bundle.putString("messagingUserID", messagingUserID);
-                            frChat.setArguments(bundle);
-                            getActivity().getSupportFragmentManager().beginTransaction().replace(flMessagingFragment.getId(), frChat).addToBackStack(null).commit();
+                            frMessages.setArguments(bundle);
+                            getActivity().getSupportFragmentManager().beginTransaction().replace(flMessagingFragment.getId(), frMessages).addToBackStack(null).commit();
                         }
                     });
                 }

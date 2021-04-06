@@ -3,6 +3,7 @@ package com.inzucorp.artistly;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -13,6 +14,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
 // if there is no user, then open create account page, else delete any previous visitngUserID and visitedUsers values and open explore page

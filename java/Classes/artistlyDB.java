@@ -13,8 +13,16 @@ import java.util.UUID;
 // When accessing the general firebase database, it must be accessed through this interface only.
 public final class artistlyDB {
 
-    private artistlyDB(){
+    final private String path;
+
+    public artistlyDB(String path){
+        this.path = path;
     }
+
+    public DatabaseReference getDBRef(){
+        return FirebaseDatabase.getInstance().getReference().child(path);
+    }
+
 // add / remove methods
 
     // add a new media post to firebase and return it's mediaID
@@ -41,30 +49,6 @@ public final class artistlyDB {
         newPost.put(randomUrl + "/description", "" + description);
         FirebaseDatabase.getInstance().getReference().child("Services").updateChildren(newPost);
         return randomUrl;
-    }
-
-    public static void createChat(otherUserDB theOtherUserDB, String message, String timeStamp) {  // move this to userDB
-        final userDB theUserDB = new userDB();;
-        final String messageUrl = UUID.randomUUID().toString();
-        Map newPost = new HashMap();
-        newPost.put("messageText", message);
-        newPost.put("receiver", theOtherUserDB.getUserID());
-        newPost.put("sender", theUserDB.getUserID());;
-        newPost.put("timeStamp", timeStamp);
-        theUserDB.getDBRef().child("messages/" + theOtherUserDB.getUserID() + "/" + messageUrl).updateChildren(newPost);
-        theOtherUserDB.getDBRef().child("messages/" + theUserDB.getUserID() + "/" + messageUrl).updateChildren(newPost);
-    }
-
-    public static void newMessage(otherUserDB theOtherUserDB, String message, String timeStamp) { // move this to userDB
-        final userDB theUserDB = new userDB();
-        final String messageUrl = UUID.randomUUID().toString();
-        Map newPost = new HashMap();
-        newPost.put("messageText", message);
-        newPost.put("receiver", theOtherUserDB.getUserID());
-        newPost.put("sender", theUserDB.getUserID());
-        newPost.put("timeStamp", timeStamp);
-        theUserDB.getDBRef().child("messages/" + theOtherUserDB.getUserID() + "/" + messageUrl).updateChildren(newPost);
-        theOtherUserDB.getDBRef().child("messages/" + theUserDB.getUserID() + "/" + messageUrl).updateChildren(newPost);
     }
 
 // query methods

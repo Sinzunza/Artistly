@@ -1,14 +1,14 @@
 package Models;
 
-public class chatsAdapter {
+public class messagesAdapter {
 
-    public String messageText, user, timeStamp;
+    public String messageText, sender, timeStamp;
 
-    public chatsAdapter() {}
+    public messagesAdapter() {}
 
-    public chatsAdapter(String messageText, String user, String timeStamp) {
+    public messagesAdapter(String messageText, String sender, String timeStamp) {
         this.messageText = messageText;
-        this.user = user;
+        this.sender = sender;
         this.timeStamp = timeStamp;
     }
 
@@ -20,12 +20,12 @@ public class chatsAdapter {
         this.messageText = messageText;
     }
 
-    public String getUser(){
-        return user;
+    public String getSender(){
+        return sender;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
     public String getTimeStamp() {return timeStamp; }

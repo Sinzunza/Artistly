@@ -1,5 +1,6 @@
 package Fragments;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,8 @@ public class PostServiceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_post_service, container, false);
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
     // initialize layout ids
         tvPostServiceUsername = v.findViewById(R.id.tvPostService_Username);
         tvPostServiceTypeArtist = v.findViewById(R.id.tvPostService_TypeArtist);

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -44,7 +45,7 @@ public class FollowActivity extends AppCompatActivity {
     ImageButton ibFollowBack, ibFollowHome, ibFollowMessages, ibFollowExplore, ibFollowNewPost, ibFollowProfile;
 
 // local variables
-    otherUserDB someUserDB;
+    otherUserDB someUserDB; // someUser can be either the user or other user
     ArtistlyFollow followType = ArtistlyFollow.Followers;
     float x1, x2, y1; // used for swiping functionality
 
@@ -52,6 +53,7 @@ public class FollowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_follow);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
     // initialize layout ids
         tvFollowUsername = findViewById(R.id.tvFollow_Username);

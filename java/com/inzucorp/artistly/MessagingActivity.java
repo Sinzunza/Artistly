@@ -4,14 +4,13 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
-import Fragments.ExploreFragment;
-import Fragments.MessagesFragment;
-import Fragments.PostMediaFragment;
+import Fragments.ChatsFragment;
 
 public class MessagingActivity extends AppCompatActivity {
 
@@ -23,6 +22,7 @@ public class MessagingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messaging);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
     // initialize layout ids
         flMessagingFragment = findViewById(R.id.flMessaging_Fragment);
@@ -33,8 +33,8 @@ public class MessagingActivity extends AppCompatActivity {
         ibMessagingProfile = findViewById(R.id.ibMessaging_Profile);
 
     // initiate explore fragment
-        final Fragment frMessages = new MessagesFragment();
-        getSupportFragmentManager().beginTransaction().add(flMessagingFragment.getId(), frMessages).commit();
+        final Fragment frChats = new ChatsFragment();
+        getSupportFragmentManager().beginTransaction().add(flMessagingFragment.getId(), frChats).commit();
 
     // set onClickListeners
         ibMessagingHome.setOnClickListener(new View.OnClickListener() {

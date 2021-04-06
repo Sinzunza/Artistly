@@ -3,6 +3,7 @@ package com.inzucorp.artistly;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +27,7 @@ public class TypeArtistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_artist);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
     // initialize layout ids
         tvTypeArtistActing = findViewById(R.id.tvTypeArtist_Acting);

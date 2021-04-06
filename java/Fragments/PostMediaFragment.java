@@ -1,5 +1,6 @@
 package Fragments;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,7 @@ public class PostMediaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_post_media, container, false);
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     // initialize layout ids
         tvPostMediaUsername = v.findViewById(R.id.tvPostMedia_Username);
         tvPostMediaTypeArtist = v.findViewById(R.id.tvPostMedia_TypeArtist);

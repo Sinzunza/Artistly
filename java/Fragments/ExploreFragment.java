@@ -1,5 +1,6 @@
 package Fragments;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -32,7 +33,7 @@ public class ExploreFragment extends Fragment {
                              Bundle savedInstanceState) {
     // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_explore, container, false);
-        View ex =
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
     // initialize layout ids
         flExploreFragment = getActivity().findViewById(R.id.flExplore_Fragment);
