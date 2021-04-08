@@ -42,7 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 // local variables
     otherUserDB someUserDB; // someUser can be either the user or other user
-    ArtistlyPost postType;
+    boolean isMedia;
     float x1, x2, y1; // for swiping functionality
 
     @Override
@@ -79,7 +79,8 @@ public class ProfileActivity extends AppCompatActivity {
             frProfileVisitingUser.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().add(flProfileFragment.getId(), frProfileVisitingUser).commit();
         }
-        postType = ArtistlyPost.Media;
+
+        isMedia = true;
 
     // initialize adapter to media
         rvProfilePosts.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
@@ -88,8 +89,9 @@ public class ProfileActivity extends AppCompatActivity {
         ivProfileMedia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (postType != ArtistlyPost.Media) {
-                    profilePostsAdapter(ArtistlyPost.Media);
+                if (!isMedia) {
+                    isMedia = true;
+                    profilePostsAdapter();
                 }
             }
         });
@@ -97,8 +99,9 @@ public class ProfileActivity extends AppCompatActivity {
         ivProfileServices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (postType != ArtistlyPost.Service) {
-                    profilePostsAdapter(ArtistlyPost.Service);
+                if (isMedia) {
+                    isMedia = false;
+                    profilePostsAdapter();
                 }
             }
         });
@@ -144,7 +147,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        profilePostsAdapter(ArtistlyPost.Media);
+        profilePostsAdapter();
     }
 
 // swiping functionality
@@ -160,14 +163,16 @@ public class ProfileActivity extends AppCompatActivity {
                 x2 = event.getX();
             // swipe left, if user swiped left & swipe was done in fragment
                 if(x1 > (x2 + 170) && y1 > 670) {
-                    if (postType != ArtistlyPost.Service) {
-                        profilePostsAdapter(ArtistlyPost.Service);
+                    if (isMedia) {
+                        isMedia = false;
+                        profilePostsAdapter();
                     }
                 }
             // swipe right, ...
                 else if((x1 + 170) < x2 && y1 > 670) {
-                    if (postType != ArtistlyPost.Media) {
-                        profilePostsAdapter(ArtistlyPost.Media);
+                    if (!isMedia) {
+                        isMedia = true;
+                        profilePostsAdapter();
                     }
                 }
                 break;
@@ -176,17 +181,17 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 // move bar and change post type based on typeAdapter
-    private void profilePostsAdapter(ArtistlyPost typeAdapter) {
+    private void profilePostsAdapter() {
     // set which post tab to underline and set the query
         Query postQuery;
-        if (typeAdapter == ArtistlyPost.Media){
-            postType = ArtistlyPost.Media;
+        if (isMedia){
+            isMedia = true;
             flProfileMediaBar.setPadding(0,0,0,6);
             flProfileServicesBar.setPadding(0,0,0,0);
             postQuery = artistlyDB.equalToQuery("Media", "user", someUserDB.getUserID());
         }
         else {
-            postType = ArtistlyPost.Service;
+            isMedia = false;
             flProfileServicesBar.setPadding(0,0,0,6);
             flProfileMediaBar.setPadding(0,0,0,0);
             postQuery = artistlyDB.equalToQuery("Services", "user", someUserDB.getUserID());
@@ -203,8 +208,10 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         final String postID = getRef(position).getKey();
                         Intent intent = new Intent(ProfileActivity.this, PostActivity.class);
-                        intent.putExtra("postID", postID);
-                        intent.putExtra("postType", postType);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("postID", postID);
+                        bundle.putBoolean("postType", isMedia);
+                        intent.putExtras(bundle);
                         startActivity(intent);
                     }
                 });

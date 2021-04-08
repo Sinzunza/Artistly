@@ -14,7 +14,7 @@ public class postsAdapter {
         return photo;
     }
 
-    public void setUsername(String photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 

@@ -65,7 +65,7 @@ public final class artistlyDB {
         return dbRef.orderByChild(orderBy).startAt(startingWith).endAt(startingWith + "\uf8ff");
     }
 
-    // if path has children starting with "startingWith" then it will return those children
+    // return all childrens of the path and the query is ordered by orderBy
     public static Query orderedByQuery(String path, String orderBy){
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(path);
         return dbRef.orderByChild(orderBy);

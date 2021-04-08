@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -33,7 +34,7 @@ import java.util.Calendar;
 import java.util.UUID;
 
 import Classes.artistlyDB;
-import Classes.userDB;
+import Fragments.MessagesFragment;
 
 public class NewPostActivity extends AppCompatActivity {
 
@@ -48,10 +49,10 @@ public class NewPostActivity extends AppCompatActivity {
 
 // local variables
     Uri imageUri;
-    ArtistlyPost postType;
     String newPostTitle;
     String newPostFee;
     String newPostDescription;
+    boolean isMedia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,20 +80,20 @@ public class NewPostActivity extends AppCompatActivity {
         ibNewPostProfile = findViewById(R.id.ibNewPost_Profile);
 
     // initialize local variables
-        postType = ArtistlyPost.Media;
+        isMedia = true;
 
     // immediately open up gallery to choose photo to crop
         openGallery();
 
     // initialize as media post, so hide fee views
-        changeType(ArtistlyPost.Media);
+        changeType();
 
     // set onClickListeners
         tvNewPostMedia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (postType != ArtistlyPost.Media) {
-                    changeType(ArtistlyPost.Media);
+                if (!isMedia) {
+                    changeType();
                 }
             }
         });
@@ -100,8 +101,8 @@ public class NewPostActivity extends AppCompatActivity {
         tvNewPostService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (postType != ArtistlyPost.Service) {
-                    changeType(ArtistlyPost.Service);
+                if (isMedia) {
+                    changeType();
                 }
             }
         });
@@ -124,12 +125,12 @@ public class NewPostActivity extends AppCompatActivity {
                     etNewPostTitle.setError("Please enter a title for your post.");
                     etNewPostTitle.requestFocus();
                 }
-                if(newPostFee.isEmpty() && postType == ArtistlyPost.Service) {
+                if(newPostFee.isEmpty() && !isMedia) {
                     etNewPostFee.setError("Please enter a service fee.");
                     etNewPostFee.requestFocus();
                 }
 
-                if (!newPostTitle.isEmpty() && (!newPostFee.isEmpty() || postType == ArtistlyPost.Media)) {
+                if (!newPostTitle.isEmpty() && (!newPostFee.isEmpty() || isMedia)) {
                     Bitmap croppedBitmap = cvNewPostPhoto.crop();
                     imageUri = getImageUri(NewPostActivity.this, croppedBitmap);
                     uploadPost();
@@ -202,7 +203,7 @@ public class NewPostActivity extends AppCompatActivity {
     private void uploadPost() {
         String randomUrl;
     // upload file to storage path depending on type postType
-        if (postType == ArtistlyPost.Media){
+        if (isMedia){
             randomUrl = "mediaPhotos/" + UUID.randomUUID().toString();
         }
         else {
@@ -218,21 +219,19 @@ public class NewPostActivity extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-                                        Intent intentStartPost;
+                                        Intent intentStartPost = new Intent(NewPostActivity.this, PostActivity.class);
                                         String postID;
                                     // upload post to database path depending on postType
-                                        if (postType == ArtistlyPost.Media){
+                                        if (isMedia){
                                             postID = artistlyDB.createMedia(newPostTitle, uri, newPostDescription);
-                                            intentStartPost = new Intent(NewPostActivity.this, PostActivity.class);
-                                            intentStartPost.putExtra("postID", postID);
-                                            intentStartPost.putExtra("postType", postType);
                                         }
                                         else {
                                             postID = artistlyDB.createService(newPostTitle, uri, newPostFee, newPostDescription);
-                                            intentStartPost = new Intent(NewPostActivity.this, PostActivity.class);
-                                            intentStartPost.putExtra("postID", postID);
-                                            intentStartPost.putExtra("postType", postType);
                                         }
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("postID", postID);
+                                        bundle.putBoolean("postType", isMedia);
+                                        intentStartPost.putExtras(bundle);
                                         startActivity(intentStartPost);
                                         finish();
                                     }
@@ -262,15 +261,15 @@ public class NewPostActivity extends AppCompatActivity {
     }
 
 // changes post type
-    private void changeType(ArtistlyPost newType){
-        if (newType == ArtistlyPost.Media){
+    private void changeType(){
+        if (isMedia){
             flNewPostMediaBar.setPadding(0,0,0,6);
             flNewPostServiceBar.setPadding(0,0,0,0);
             etNewPostTitle.setHint("Caption");
             clNewPostDescription.setVisibility(View.INVISIBLE);
             tvNewPostMoneySign.setVisibility(View.INVISIBLE);
             etNewPostFee.setVisibility(View.INVISIBLE);
-            postType = ArtistlyPost.Media;
+            isMedia = true;
         }
         else {
             flNewPostServiceBar.setPadding(0,0,0,6);
@@ -279,12 +278,7 @@ public class NewPostActivity extends AppCompatActivity {
             clNewPostDescription.setVisibility(View.VISIBLE);
             tvNewPostMoneySign.setVisibility(View.VISIBLE);
             etNewPostFee.setVisibility(View.VISIBLE);
-            postType = ArtistlyPost.Service;
+            isMedia = false;
         }
     }
-}
-
-enum ArtistlyPost {
-    Media,
-    Service
 }

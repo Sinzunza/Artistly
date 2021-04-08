@@ -19,6 +19,10 @@ public class PostActivity extends AppCompatActivity {
     FrameLayout flPostFragment;
     ImageButton ibPostHome, ibPostMessages, ibPostExplore, ibPostNewPost, ibPostProfile;
 
+// local variables
+    boolean isMedia;
+    Bundle arguments;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +37,12 @@ public class PostActivity extends AppCompatActivity {
         ibPostNewPost = findViewById(R.id.ibPost_NewPost);
         ibPostProfile = findViewById(R.id.ibPost_Profile);
 
+    // initialize local vairables
+        isMedia = true;
+        arguments = getIntent().getExtras();
+
     // open fragment depending on postType
-        if (getIntent().getSerializableExtra("postType") == ArtistlyPost.Media) {
+        if (arguments.getBoolean("postType") == isMedia) {
             final Fragment frPostMedia = new PostMediaFragment();
             Bundle bundle = new Bundle();
             bundle.putString("postID", getIntent().getStringExtra("postID"));
